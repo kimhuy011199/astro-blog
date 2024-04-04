@@ -1,0 +1,28 @@
+---
+import Facebook from '@components/social-media/Facebook.astro';
+import Youtube from '@components/social-media/Youtube.astro';
+import Github from '@components/social-media/Github.astro';
+import Linkedin from '@components/social-media/Linkedin.astro';
+import Twitter from '@components/social-media/Twitter.astro';
+---
+
+<footer class="mt-auto relative">
+  <div
+    class="mx-auto px-4 w-full py-6 max-w-5xl flex flex-col gap-6 sm:flex-row justify-between items-center sm:px-6 lg:px-8"
+  >
+    <div
+      class="absolute inset-x-0 top-0 h-px bg-zinc-900/5 transition dark:bg-white/5"
+    >
+    </div>
+    <p class="text-zinc-600 dark:text-zinc-400 text-sm">
+      Made with ❤️ by kimhuy011199
+    </p>
+    <div class="flex gap-6 items-center">
+      <Facebook />
+      <Github />
+      <Youtube />
+      <Linkedin />
+      <Twitter />
+    </div>
+  </div>
+</footer>

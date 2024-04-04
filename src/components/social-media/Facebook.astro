@@ -1,0 +1,28 @@
+---
+const {
+  label = 'Link to Facebook',
+  href = 'https://facebook.com/',
+  isColored = false,
+} = Astro.props;
+const coloredClass = isColored
+  ? 'fill-[#1778F2] dark:fill-[#1778F2]'
+  : 'transition fill-zinc-300 group-hover:fill-zinc-400 dark:fill-zinc-600 group-hover:dark:fill-zinc-400';
+const iconClass = isColored ? 'fill-white' : 'fill-white dark:fill-zinc-900';
+---
+
+<a aria-label={label} href={href} target="_blank" class="group">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-6 h-6"
+    viewBox="0 0 112.196 112.196"
+    xml:space="preserve"
+  >
+    <g>
+      <circle class={coloredClass} cx="56.098" cy="56.098" r="56.098"></circle>
+      <path
+        class={iconClass}
+        d="M70.201,58.294h-10.01v36.672H45.025V58.294h-7.213V45.406h7.213v-8.34   c0-5.964,2.833-15.303,15.301-15.303L71.56,21.81v12.51h-8.151c-1.337,0-3.217,0.668-3.217,3.513v7.585h11.334L70.201,58.294z"
+      ></path>
+    </g>
+  </svg>
+</a>
