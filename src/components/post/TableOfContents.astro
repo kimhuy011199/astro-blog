@@ -1,0 +1,53 @@
+---
+import TableOfContentsHeading from '@components/post/TableOfContentsHeading.astro';
+import generateToc from '@utils/generateToc';
+
+const { headings } = Astro.props;
+const toc = generateToc(headings);
+---
+
+<nav id="toc" class="sticky top-0 py-6">
+  <span class="block uppercase mb-3 font-semibold">Table of contents</span>
+  <div class="w-12 h-1 border-b-2 border-b-green-500"></div>
+  <ul class="mt-6 flex flex-col gap-3">
+    {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+  </ul>
+</nav>
+
+<script>
+  const registerIntersectionObserver = () => {
+    if (window.location.pathname.split('/')[1] !== 'posts') {
+      return;
+    }
+
+    const observer = new IntersectionObserver((sections) => {
+      sections.forEach((section) => {
+        const headingElement = section.target.querySelector('h2, h3, h4, h5');
+        if (!headingElement) {
+          return;
+        }
+
+        const id = headingElement.getAttribute('id');
+        const linkElement = document.querySelector(
+          `nav#toc li a[href="#${id}"]`
+        );
+        if (!linkElement) {
+          return;
+        }
+
+        // Add/remove the .active class based on whether the section is visible
+        const addRemove = section.intersectionRatio > 0 ? 'add' : 'remove';
+        linkElement.classList[addRemove]('active');
+      });
+    });
+
+    // Observe all the sections of the article
+    document.querySelectorAll('article section').forEach((section) => {
+      observer.observe(section);
+    });
+  };
+
+  registerIntersectionObserver();
+
+  document.addEventListener('astro:after-swap', registerIntersectionObserver);
+</script>
