@@ -1,0 +1,16 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const { pageTitle, pageDesc, pageAuthor, heading, desc } = Astro.props;
+---
+
+<BaseLayout pageTitle={pageTitle} pageDesc={pageDesc} pageAuthor={pageAuthor}>
+  <div class="mx-auto lg:w-4/5 px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-4 pb-10">
+      <h1 class="text-4xl font-semibold">{heading}</h1>
+      {desc ? <p class="text-zinc-700 dark:text-zinc-300">{desc}</p> : null}
+      <slot name="desc" />
+    </div>
+    <slot />
+  </div>
+</BaseLayout>

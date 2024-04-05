@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ScrollToTop from '@components/post/ScrollToTop.astro';
+import PostHeading from '@components/post/PostHeading.astro';
+import PostContent from '@components/post/PostContent.astro';
+import TableOfContents from '@components/post/TableOfContents.astro';
+import RelatedPosts from '@components/post/RelatedPosts.astro';
+import SharePost from '@components/post/SharePost.astro';
+import Tags from '@components/post/Tags.astro';
+import Comment from '@components/post/Comment';
+
+const { frontmatter, headings } = Astro.props;
+const { title, description, author, pubDate, tags, url } = frontmatter;
+---
+
+<BaseLayout pageTitle={title} pageDesc={description} pageAuthor={author}>
+  <ScrollToTop />
+  <div class="mx-auto px-4 sm:px-6 lg:px-8">
+    <PostHeading title={title} pubDate={pubDate} author={author} />
+    <div class="flex flex-col lg:grid lg:grid-cols-4 gap-10 py-6 pt-4 sm:py-10">
+      <div class="lg:col-span-1 hidden lg:block">
+        <TableOfContents headings={headings} />
+      </div>
+      <div class="lg:col-span-3 py-4">
+        <PostContent>
+          <slot />
+        </PostContent>
+        <Tags tags={tags} />
+        <SharePost />
+      </div>
+    </div>
+    <div>
+      <div class="w-1 h-12 my-4 mx-auto bg-green-500 rounded-lg"></div>
+      <Comment client:only="react" />
+    </div>
+    <div>
+      <div class="w-1 h-12 my-10 mx-auto bg-green-500 rounded-lg"></div>
+      <RelatedPosts currentPost={frontmatter} />
+    </div>
+  </div>
+</BaseLayout>
