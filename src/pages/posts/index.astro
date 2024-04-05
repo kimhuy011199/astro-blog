@@ -1,0 +1,21 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import BlogPostList from '@components/BlogPostList';
+import Pagination from '@components/Pagination.astro';
+import sortPosts from '@utils/sortPosts';
+import { POST_PER_PAGE } from '@config/constant';
+import getPageTitle from '@utils/getPageTitle';
+
+const allPosts = await Astro.glob('./*.mdx');
+const sortedPosts = sortPosts(allPosts);
+const posts = sortedPosts.slice(0, POST_PER_PAGE);
+
+const heading = 'Posts';
+const desc = "All the articles I've posted.";
+const pageTitle = getPageTitle(heading);
+---
+
+<PageLayout pageTitle={pageTitle} heading={heading} desc={desc}>
+  <BlogPostList posts={posts} />
+  <Pagination nextPage="/posts/2" />
+</PageLayout>
