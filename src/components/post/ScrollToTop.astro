@@ -1,0 +1,45 @@
+---
+
+---
+
+<button
+  id="scroll-top-btn"
+  class="fixed bottom-4 sm:bottom-20 right-4 p-1.5 sm:p-2.5 flex items-center justify-center rounded-md transition dark:bg-zinc-900 bg-white border border-zinc-200 dark:border-zinc-700 z-10"
+  type="button"
+  aria-label="Scroll to top"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="w-4 h-4"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75"></path>
+  </svg>
+</button>
+
+<script>
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleAddEventListener = () => {
+    const scrollBtnElement = document.querySelector('#scroll-top-btn');
+
+    if (scrollBtnElement) {
+      scrollBtnElement.addEventListener('click', handleScrollToTop);
+    }
+  };
+
+  handleAddEventListener();
+
+  document.addEventListener('astro:after-swap', handleAddEventListener);
+</script>
