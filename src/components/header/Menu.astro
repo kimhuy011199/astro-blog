@@ -1,0 +1,60 @@
+---
+
+---
+
+<button
+  id="toggle-menu-btn"
+  class="flex sm:hidden z-50"
+  aria-label="Toggle menu"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="w-5 h-5"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+  </svg>
+</button>
+
+<div
+  id="nav-overlay"
+  class="hidden sm:hidden fixed inset-0 bg-white dark:bg-zinc-900 h-screen z-40"
+>
+</div>
+
+<script>
+  const handleToggleMenu = () => {
+    // Toggle background overlay
+    const navOverlayElement = document.querySelector('#nav-overlay');
+    navOverlayElement.classList.toggle('flex');
+    navOverlayElement.classList.toggle('hidden');
+
+    // Toggle menu
+    const navElement = document.querySelector('#nav');
+    navElement.classList.toggle('flex');
+    navElement.classList.toggle('hidden');
+
+    // Scroll to top and disabled scroll
+    document.body.classList.toggle('overflow-hidden');
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleAddEventListener = () => {
+    document
+      .querySelector('#toggle-menu-btn')
+      .addEventListener('click', handleToggleMenu);
+  };
+
+  handleAddEventListener();
+
+  document.addEventListener('astro:after-swap', handleAddEventListener);
+</script>

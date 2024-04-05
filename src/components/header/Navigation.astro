@@ -1,0 +1,61 @@
+---
+import Menu from '@components/header/Menu.astro';
+
+const { currentSegment } = Astro.props;
+---
+
+<nav id="nav" class="hidden sm:block z-50 fixed sm:relative inset-0">
+  <ul
+    role="list"
+    class="flex flex-col sm:flex-row items-center gap-12 w-full pt-20 sm:pt-0"
+  >
+    <li>
+      <a
+        class=`leading-5 text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white ${currentSegment === 'posts' ? 'active' : ''}`
+        href="/posts">Posts</a
+      >
+    </li>
+    <li>
+      <a
+        class=`leading-5 text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white ${currentSegment === 'tags' ? 'active' : ''}`
+        href="/tags">Tags</a
+      >
+    </li>
+    <li>
+      <a
+        class=`leading-5 text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white ${currentSegment === 'about' ? 'active' : ''}`
+        href="/about">About</a
+      >
+    </li>
+    <li>
+      <a
+        aria-label="Search posts"
+        class="leading-5 text-zinc-600 transition"
+        href="/search"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          aria-hidden="true"
+          class=`h-5 w-5 stroke-zinc-600 hover:stroke-zinc-900 dark:stroke-zinc-400 dark:hover:stroke-white ${currentSegment === 'search' ? 'active' : ''}`
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12.01 12a4.25 4.25 0 1 0-6.02-6 4.25 4.25 0 0 0 6.02 6Zm0 0 3.24 3.25"
+          ></path>
+        </svg>
+      </a>
+    </li>
+  </ul>
+</nav>
+<Menu />
+
+<style>
+  a.active {
+    @apply text-green-600 dark:text-green-400;
+  }
+  svg.active {
+    @apply stroke-green-600 dark:text-green-400;
+  }
+</style>
