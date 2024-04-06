@@ -1,0 +1,76 @@
+---
+const { fileName = 'command' } = Astro.props;
+---
+
+<astro-code>
+  <div
+    class="relative my-6 overflow-hidden rounded-[10px] bg-zinc-900 shadow-md dark:border dark:border-white/10"
+  >
+    <div class="flex p-[1px] bg-zinc-900">
+      <span
+        class="text-white text-sm px-5 py-1.5 bg-zinc-800 rounded-t-lg border-b border-b-green-700"
+        >{fileName}</span
+      >
+    </div>
+    <div>
+      <slot />
+    </div>
+    <div class="absolute right-2 top-1.5 flex items-center gap-2">
+      <span
+        id="copied-text"
+        class="transition-all opacity-0 text-xs text-green-500">Copied!</span
+      >
+      <button
+        class="flex h-6 w-6 items-center justify-center rounded-md transition hover:bg-zinc-900/5 dark:hover:bg-white/5"
+        aria-label="Copy code"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          aria-hidden="false"
+          class="h-5 w-5 fill-zinc-500/20 stroke-zinc-100 transition-colors group-hover/button:stroke-zinc-400"
+        >
+          <path
+            stoke-width="0"
+            d="M5.5 13.5v-5a2 2 0 0 1 2-2l.447-.894A2 2 0 0 1 9.737 4.5h.527a2 2 0 0 1 1.789 1.106l.447.894a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2Z"
+          ></path>
+          <path
+            fill="none"
+            stroke-linejoin="round"
+            d="M12.5 6.5a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2m5 0-.447-.894a2 2 0 0 0-1.79-1.106h-.527a2 2 0 0 0-1.789 1.106L7.5 6.5m5 0-1 1h-3l-1-1"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</astro-code>
+
+<script>
+  class AstroCode extends HTMLElement {
+    constructor() {
+      super();
+
+      const codeContent = this.querySelector('pre').textContent;
+      const copyBtnElement = this.querySelector('button');
+      const copiedTextElement = this.querySelector('#copied-text');
+
+      copyBtnElement.addEventListener('click', async () => {
+        // Copy code
+        await navigator.clipboard.writeText(codeContent);
+
+        // Show copied text
+        copiedTextElement.classList.remove('opacity-0');
+        copiedTextElement.classList.add('opacity-1');
+        copyBtnElement.disabled = true;
+
+        setTimeout(() => {
+          // Remove copid text
+          copiedTextElement.classList.add('opacity-0');
+          copiedTextElement.classList.remove('opacity-1');
+          copyBtnElement.disabled = false;
+        }, 2000);
+      });
+    }
+  }
+
+  customElements.define('astro-code', AstroCode);
+</script>
