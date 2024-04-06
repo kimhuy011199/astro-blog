@@ -1,0 +1,23 @@
+---
+const { src = '', caption = '', height = '', width = '' } = Astro.props;
+---
+
+<figure>
+  <video
+    autoplay=""
+    loop=""
+    muted="true"
+    playsinline=""
+    controls=""
+    class="rounded-lg m-0"
+    width={width}
+    height={height}
+    src={src}
+  >
+    <source src={src} type="video/mp4" />
+    <p>Sorry, your browser doesn't support embedded videos.</p>
+  </video>
+  <figcaption class="my-4 text-center text-sm italic">
+    <p>{caption}</p>
+  </figcaption>
+</figure>
