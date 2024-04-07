@@ -1,0 +1,13 @@
+---
+import BlogPostList from '@components/BlogPostList';
+import getRelatedPosts from '@utils/getRelatedPosts';
+
+const { currentPost } = Astro.props;
+const posts = await Astro.glob('../../pages/posts/*.mdx');
+const relatedPosts = getRelatedPosts(posts, currentPost);
+---
+
+<div class="mx-auto lg:w-4/5 relative">
+  <h3 class="text-xl sm:text-2xl py-4 font-semibold">Related Posts:</h3>
+  <BlogPostList posts={relatedPosts} />
+</div>
