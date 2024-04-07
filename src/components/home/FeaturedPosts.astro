@@ -1,0 +1,16 @@
+---
+import AllPostsButton from '@components/home/AllPostsButton.astro';
+import BlogPostList from '@components/BlogPostList';
+import getFeaturedPosts from '@utils/getFeaturedPosts';
+import sortPosts from '@utils/sortPosts';
+
+const posts = await Astro.glob('../../pages/posts/*.mdx');
+const sortedPosts = sortPosts(posts);
+const featuredPosts = getFeaturedPosts(sortedPosts);
+---
+
+<div>
+  <h2 class="text-2xl py-4 font-semibold">Featured Posts</h2>
+  <BlogPostList posts={featuredPosts} />
+  <AllPostsButton />
+</div>

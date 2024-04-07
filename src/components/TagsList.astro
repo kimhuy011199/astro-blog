@@ -1,0 +1,17 @@
+---
+const { tags } = Astro.props;
+---
+
+<ul class="flex flex-wrap gap-4 gap-y-6">
+  {
+    tags.map((tag) => (
+      <li>
+        <a href={`/tags/${tag}`}>
+          <code class="py-1.5 px-2 transition hover:text-green-600 hover:dark:text-green-500">
+            #{tag}
+          </code>
+        </a>
+      </li>
+    ))
+  }
+</ul>
