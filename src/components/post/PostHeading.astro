@@ -1,0 +1,31 @@
+---
+import slugify from '@utils/slugify';
+import formatDate from '@utils/formatDate';
+import profile from '@assets/images/post-profile.webp';
+
+const { title, author, pubDate } = Astro.props;
+const { datetime, displayDate } = formatDate(pubDate);
+---
+
+<div class="flex flex-col justify-center items-center gap-6 mb-6">
+  <time class="text-zinc-600 dark:text-zinc-400" datetime={datetime}
+    >{displayDate}</time
+  >
+  <h1
+    class="text-center text-[32px] !leading-tight sm:text-5xl font-semibold"
+    style={{ viewTransitionName: slugify(title) }}
+  >
+    {title}
+  </h1>
+  <div class="flex items-center gap-3">
+    <span>Written by:</span>
+    <img
+      class="inline-block rounded-full border border-white/90 dark:border-white/70"
+      src={profile.src}
+      alt={author}
+      width="44"
+      height="44"
+    />
+    <span>{author}</span>
+  </div>
+</div>
