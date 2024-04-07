@@ -1,0 +1,33 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import BlogPostList from '@components/BlogPostList';
+import getAllTags from '@utils/getAllTags';
+import getPostsByTag from '@utils/getPostsByTag';
+import sortPosts from '@utils/sortPosts';
+import getPageTitle from '@utils/getPageTitle';
+
+export const getStaticPaths = async () => {
+  const posts = await Astro.glob('../posts/*.mdx');
+  const sortedPosts = sortPosts(posts);
+  const tags = getAllTags(sortedPosts);
+
+  return getPostsByTag(tags, sortedPosts);
+};
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+
+const heading = `Tag:${tag}`;
+const pageTitle = getPageTitle(heading);
+---
+
+<PageLayout pageTitle={pageTitle} heading={heading}>
+  <p
+    slot="desc"
+    class="text-zinc-700 dark:text-zinc-300 flex items-center gap-2"
+  >
+    <span>All the articles with the tag</span>
+    <code>#{tag}</code>
+  </p>
+  <BlogPostList posts={posts} />
+</PageLayout>

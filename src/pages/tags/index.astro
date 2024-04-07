@@ -1,0 +1,17 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import TagsList from '@components/TagsList.astro';
+import getAllTags from '@utils/getAllTags';
+import getPageTitle from '@utils/getPageTitle';
+
+const posts = await Astro.glob('../posts/*.mdx');
+const tags = getAllTags(posts);
+
+const heading = 'Tags';
+const desc = 'All the tags used in posts.';
+const pageTitle = getPageTitle(heading);
+---
+
+<PageLayout pageTitle={pageTitle} heading={heading} desc={desc}>
+  <TagsList tags={tags} />
+</PageLayout>
