@@ -1,0 +1,74 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import getPageTitle from '@utils/getPageTitle';
+
+const heading = 'About';
+const desc = 'Last update: Oct 11, 2023';
+const pageTitle = getPageTitle(heading);
+---
+
+<PageLayout pageTitle={pageTitle} heading={heading} desc={desc}>
+  <div
+    class="w-full max-w-full prose dark:prose-invert prose-li:marker:text-green-500 prose-a:text-green-500 prose-p:text-lg"
+  >
+    <p>
+      Hi there 👋 I'm Huy, a hybrid designer and full-stack developer who's
+      passionate about creating exceptional products with delightful user
+      interfaces. Explore more about me and <a href="/">my portfolio</a>.
+    </p>
+    <p>
+      Having delved into <a href="https://astro.build/" target="_blank">Astro</a
+      > (a web framework for building <span class="italic"
+        >fast, content-focused</span
+      > websites), I put my newfound knowledge into practice to create this
+      blog:
+    </p>
+    <h2>Tech Stack</h2>
+    <p>This blog is written in Javascript with:</p>
+    <div>
+      <ul>
+        <li>
+          <a href="https://astro.build/" target="_blank">Astro</a>
+          <span> - Main framework</span>
+        </li>
+        <li>
+          <a href="https://react.dev/" target="_blank">React</a>
+          <span> - Interactive component</span>
+        </li>
+        <li>
+          <a href="https://tailwindcss.com/" target="_blank">TailwindCSS</a>
+          <span> - Styling</span>
+        </li>
+        <li>
+          <a href="https://mdxjs.com/" target="_blank">MDX</a>
+          <span> - Blog content</span>
+        </li>
+        <li>
+          <a href="https://www.netlify.com/" target="_blank">Netlify</a>
+          <span> - Deployment</span>
+        </li>
+      </ul>
+    </div>
+    <h2>Features</h2>
+    <p>Here are some key features of this blog:</p>
+    <div>
+      <ul>
+        <li>Fully responsive and accessible</li>
+        <li>SEO-friendly</li>
+        <li>Light & dark mode</li>
+        <li>Fuzzy search</li>
+        <li>Fast performance</li>
+        <li>Posts pagination</li>
+        <li>Sitemap & RSS feed</li>
+        <li>Interactive table of contents</li>
+        <li>Comments with Github Discussions</li>
+        <li>View transitions</li>
+        <li>Share posts to Facebook, Linkedin, Twitter</li>
+      </ul>
+    </div>
+    <p>
+      If you like this blog or have any feedback, feel free to reach out to me
+      via <a href="mailto:kimhuy011199@gmail.com">my email</a>.
+    </p>
+  </div>
+</PageLayout>
