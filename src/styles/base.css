@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-sans scroll-smooth;
+  }
+}
+
+code:not(pre > code) {
+  @apply text-zinc-950 font-semibold text-sm py-1 px-1.5 rounded-lg bg-gray-100 border border-gray-300 dark:bg-zinc-800 dark:border-zinc-700 dark:text-white before:hidden after:hidden;
+}
+
+.callout p {
+  @apply m-0;
+}
