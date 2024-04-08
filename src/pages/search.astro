@@ -1,0 +1,15 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import SearchBar from '@components/search/Search.jsx';
+import getPageTitle from '@utils/getPageTitle';
+
+const posts = await Astro.glob('../pages/posts/*.mdx');
+
+const heading = 'Search';
+const desc = 'Search any article ...';
+const pageTitle = getPageTitle(heading);
+---
+
+<PageLayout pageTitle={pageTitle} heading={heading} desc={desc}>
+  <SearchBar client:load posts={posts} />
+</PageLayout>
