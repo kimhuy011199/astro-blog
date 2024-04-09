@@ -1,0 +1,65 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: How Astro Does i18n
+pubDate: 2023-08-08
+description: If Astro is truly meant to be for everyone, then you must include the majority of the planet (83%) that does not speak English.
+author: Huy Nguyen Kim
+tags: [astro]
+---
+
+import { Image } from 'astro:assets';
+import BlockCode from '../../components/markdown/BlockCode.astro';
+
+Welcome, world.
+
+**“Astro is for everyone”** is a common saying on our team. It began as a saying to help us design APIs and relate to our users. But as Astro has evolved, this core value of accessibility has worked its way into more than just feature development.
+
+<section>
+
+## Astro is for everyone
+
+If Astro is truly meant to be for everyone, then you must include the majority of the planet (83%) that does not speak English! 18 months ago, we decided to get serious and invest in overhauling our documentation, and this included a major internationalization (i18n) initiative.
+
+<Image
+  src="https://astro.build/_astro/blog-hero-post-header.6f7a82e3.webp"
+  alt="Astro View Transitions"
+  height="656"
+  width="1536"
+/>
+
+Our translations are almost entirely made up of open-source contributions, submitted by volunteers all over the world. We are so, so grateful to everyone who has contributed so far.
+
+> Docs were phenomenal. What I do think was super helpful is that Astro does a very good job of being very strong on convention. So when you're trying to use it for the job it's meant for, it's just painfully clear what you're doing. You're never worried the chair will be pulled out from underneath you. You can always develop on these assumptions.
+
+Today is our official Community Day celebration, so we wanted to share how we built this internationalization engine at Astro. We are lucky to have one of the best communities in open-source, and wanted to share some of our successes — and challenges — with you in this post.
+
+</section>
+
+<section>
+
+## Contributor Onboarding
+
+Not all potential contributors will be familiar with GitHub's workflow involving git, branching, merge conflicts, etc. It might seem like an odd choice to throw non-code contributors into such a code-heavy environment. However, with our code stored on GitHub, we can keep our content on an open platform, while also keeping the translated content close to the code of the docs site itself.
+
+<Image
+  src="https://astro.build/_astro/github-pulls.d8f4c03f.webp"
+  alt="Astro View Github"
+  height="542"
+  width="1536"
+/>
+
+Led by beloved Astro maintainer Hippo, our docs team built a custom [Translation Tracker](), the showpiece of our i18n automation! It tracks every docs page marked as “available to translate” by language and reports its own current state:
+
+- fully-translated and up-to-date;
+- needing an update to match the English documentation;
+- or, not yet translated.
+
+</section>
+
+<section>
+
+## Going forward
+
+We're thrilled with the results of our intentional focus on the internationalization (i18n) of our documentation, and so humbled and gratified by the enthusiasm and appreciation we've received. We know that the success of any open-source project depends on supporting every member of your community.
+
+</section>

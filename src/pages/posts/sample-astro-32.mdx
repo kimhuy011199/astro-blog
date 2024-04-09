@@ -1,0 +1,124 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Astro 3.2: View Transitions Improvements'
+pubDate: 2023-09-30
+description: To take advantage of the latest view transitions features, make sure you're running the latest version of Astro you can upgrade to Astro 3.2 by running the upgrade command.
+author: Huy Nguyen Kim
+featured: true
+tags: [astro, view-transitions]
+---
+
+import { Image } from 'astro:assets';
+import BlockCode from '../../components/markdown/BlockCode.astro';
+import CalloutTip from '../../components/markdown/CalloutTip.astro';
+import Video from '../../components/markdown/Video.astro';
+
+Astro 3.2 is out with several new improvements that make [view transitions](https://docs.astro.build/en/guides/view-transitions/) and integrations even easier to use:
+
+- Control the browser history stack
+- Trigger page navigation via JavaScript
+- Route announcer for screen readers
+- Dynamically add integrations
+
+To take advantage of the latest view transitions features, make sure you're running the latest version of Astro. You can upgrade to Astro 3.2 by running the upgrade command for your package manager of choice:
+
+<BlockCode>
+
+```
+npm install astro@latest
+pnpm upgrade astro --latest
+yarn upgrade astro --latest
+```
+
+</BlockCode>
+
+<section>
+
+## Astro View Transitions
+
+View Transitions are a set of new platform APIs that unlock native browser transition effects between pages. Historically this has only been possible in Single Page Applications (SPAs), but web browsers and spec authors have been working hard over the last few years to bring native page transitions to the platform, and Astro 3.0 is the first web framework to bring them to the mainstream.
+
+With Astro View Transitions, you can:
+
+1. Morph persistent elements from one page to another
+2. Fade content on and off the page, for a less jarring navigation effect
+3. Slide content on and off the page, for a bit more personality
+4. Persist common UI across pages, with or without a refresh
+
+We've put a ton of effort in to make View Transitions work great across all browsers, even those that don't yet support the native View Transition APIs. Astro 3.0 includes fallbacks for most browsers, in the form of a small, ~3kb script that Astro adds to your page automatically.
+
+<Video
+  src="https://astro.build/assets/blog/astro-3/demo-2.mp4"
+  caption="Watch Joe Bell demo the new View Transitions feature."
+/>
+
+View Transitions are a set of new platform APIs that unlock native browser transition effects between pages. Historically this has only been possible in Single Page Applications (SPAs), but web browsers and spec authors have been working hard over the last few years to bring native page transitions to the platform, and Astro 3.0 is the first web framework to bring them to the mainstream.
+
+<Image
+  src="https://astro.build/_astro/post-asset-1.497603c0.webp"
+  alt="Astro View Transitions"
+  height="656"
+  width="1536"
+/>
+
+**Each demo feels like a native, client-side application. But they are not.** It's all server-rendered HTML, brought to life with Astro 3.0 and the new View Transitions API. The best part about View Transitions in Astro is how simple they are to use:
+
+<BlockCode fileName="src/pages/index.astro">
+
+```astro
+---
+import {ViewTransitions} from 'astro:transitions';
+---
+
+<head>
+  <title>My View Transition Demo</title>
+  <ViewTransitions />
+</head>
+<body>
+
+</body>
+```
+
+</BlockCode>
+
+Astro users have had early access to View Transitions since Astro 2.9. Our community has been experimenting ever since, providing early feedback that helped shape this final API you see today.
+
+</section>
+
+<section>
+
+## History Replacement on Links
+
+You can now configure individual links to prevent a new history entry from being added to the browser stack on navigation. Add the `data-astro-history="replace"` attribute to any `<a>` tag and Astro will instead use the underlying `history.replaceState API`. Use this for fewer back button clicks, or to avoid sending readers back to pages like form submission confirmations.
+
+<BlockCode fileName="index.jsx">
+
+```jsx
+<a href="/toggle" data-astro-history="replace">
+  Toggle me
+</a>
+```
+
+</BlockCode>
+
+</section>
+
+<section>
+
+## Route Announcer
+
+The View Transitions router now does route announcements. When transitioning between pages with a traditional MPA approach, assistive technologies will announce the page title when the page finishes loading. This does not automatically happen during client-side routing, so visitors relying on these technologies to announce routes are not aware when a page has changed.
+
+The view transitions route announcer runs after the astro:page-load event, looking for the page `<title>` to announce. If one cannot be found, the announcer falls back to the first `<h1>` it finds or otherwise announces the pathname. We recommend you always include a `<title>` on each page for accessibility.
+
+See the [View Transitions docs](https://docs.astro.build/en/guides/view-transitions/) for more on how accessibility is handled.
+
+</section>
+
+<section>
+
+## More
+
+Additional bug fixes and integration features are included in this release. Check out the release notes to learn more.
+
+</section>
