@@ -62,6 +62,11 @@ const Search = ({ posts }) => {
     }
   }, [inputValue]);
 
+  // Auto focus when go to search page
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   return (
     <div className="flex flex-col gap-4">
       <SearchInput
