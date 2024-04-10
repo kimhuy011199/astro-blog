@@ -1,0 +1,17 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import getPageTitle from '@utils/getPageTitle';
+
+const heading = 'Search';
+const pageTitle = getPageTitle(heading);
+---
+
+<PageLayout>
+  <div class="flex flex-col justify-center items-center gap-6 mt-6">
+    <span class="text-8xl">
+      404
+    </span>
+    <span class="text-xl font-semibold">Page Not Found</span>
+    <a href="/" class="underline text-green-500">Go to home</a>
+  </div>
+</PageLayout>
