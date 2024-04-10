@@ -8,7 +8,7 @@ const posts = await Astro.glob('../posts/*.mdx');
 const tags = getAllTags(posts);
 
 const heading = 'Tags';
-const desc = 'All the tags used in posts.';
+const desc = 'All the tags associated with published content.';
 const pageTitle = getPageTitle(heading);
 ---
 

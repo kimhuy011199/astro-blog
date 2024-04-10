@@ -24,10 +24,16 @@ const pageTitle = getPageTitle(heading);
 <PageLayout pageTitle={pageTitle} heading={heading}>
   <p
     slot="desc"
-    class="text-zinc-700 dark:text-zinc-300 flex items-center gap-2"
+    class="text-zinc-700 dark:text-zinc-300 flex items-center"
   >
-    <span>All the articles with the tag</span>
+    <span class="pr-3">All the posts with the tag:</span>
     <code>#{tag}</code>
+    <a
+      class='text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+      href="/tags"
+    >
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7"><path d="m7.757 7.757 8.486 8.486M7.757 16.243l8.486-8.486" stroke="currentColor" stroke-width="2"></path></svg>
+    </a>
   </p>
   <BlogPostList posts={posts} />
 </PageLayout>
