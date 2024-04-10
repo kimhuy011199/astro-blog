@@ -15,7 +15,7 @@ const SearchInput = ({ inputValue, handleChange, inputRef }) => {
       </svg>
       <input
         className="appearance-none w-full flex pl-10 py-2.5 rounded-lg bg-zinc-50 shadow dark:shadow-xl outline-none focus:outline-none ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800 text-zinc-900 placeholder:text-zinc-500 dark:text-white"
-        placeholder="Find something..."
+        placeholder="What are you looking for?"
         type="text"
         value={inputValue}
         onChange={handleChange}
