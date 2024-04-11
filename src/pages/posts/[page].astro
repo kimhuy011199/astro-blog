@@ -3,18 +3,19 @@ import PageLayout from '@layouts/PageLayout.astro';
 import BlogPostList from '@components/BlogPostList';
 import Pagination from '@components/Pagination.astro';
 import sortPosts from '@utils/sortPosts';
+import { POST_PER_PAGE } from '@config/constant';
 
 export const getStaticPaths = async ({ paginate }) => {
   const posts = await Astro.glob('./*.mdx');
   const sortedPosts = sortPosts(posts);
-  return paginate(sortedPosts, { pageSize: 3 });
+  return paginate(sortedPosts, { pageSize: POST_PER_PAGE });
 };
 
 const { page } = Astro.props;
 
 const pageTitle = 'Blog Page';
 const heading = 'Posts';
-const desc = "All the articles I've posted.";
+const desc = "All the posts I've published.";
 ---
 
 <PageLayout pageTitle={pageTitle} heading={heading} desc={desc}>
