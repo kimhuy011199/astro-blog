@@ -8,11 +8,11 @@ const BlogPost = ({ title, url, desc, pubDate }) => {
     <li>
       <a
         href={url}
-        className="flex flex-col gap-2.5 rounded-xl p-6 sm:px-5 transition bg-zinc-200/20 dark:bg-zinc-800/40 hover:scale-100 sm:hover:scale-[1.02]"
+        className="border border-zinc-100 dark:border-zinc-800 flex flex-col gap-2.5 rounded-xl p-6 sm:px-5 transition bg-zinc-200/30 dark:bg-zinc-800/60 hover:scale-100 sm:hover:scale-[1.02]"
       >
         <h2
           style={{ viewTransitionName: slugify(title) }}
-          className="text-green-500 font-medium text-xl"
+          className="text-green-600 dark:text-green-500 font-medium text-xl"
         >
           {title}
         </h2>
