@@ -1,16 +1,24 @@
 ---
 import PageLayout from '@layouts/PageLayout.astro';
-import Rss from '@components/home/Rss.astro';
-import HomeDesc from '@components/home/HomeDesc.astro';
 import FeaturedPosts from '@components/home/FeaturedPosts.astro';
 import getPageTitle from '@utils/getPageTitle';
 
-const heading = 'Welcome to huynk.tech 👋';
+const heading = 'Exploring the World of Modern Web Development 🚀';
 const pageTitle = getPageTitle('Home');
 ---
 
-<PageLayout pageTitle={pageTitle} heading={heading}>
-  <HomeDesc />
-  <Rss />
+<PageLayout pageTitle={pageTitle}>
+  <h1
+    slot="heading"
+    class="text-4xl leading-snug lg:text-5xl lg:tracking-tight lg:leading-snug font-semibold"
+  >
+    {heading}
+  </h1>
+  <p slot="desc" class="text-zinc-700 dark:text-zinc-300 mt-2">
+    Welcome to my blog! 👋 Here, I've created a space to sharing my passion for
+    web development. It's more than just a place to read articles - it's a
+    platform designed to inspire developers to continue their journey of
+    learning and growth alongside me.
+  </p>
   <FeaturedPosts />
 </PageLayout>
