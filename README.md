@@ -1,47 +1,36 @@
-# Astro Starter Kit: Minimal
+# Blog huynk.tech 📃
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Blog [huynk.tech](https://huynk.tech) is my personal blog, built with Astro. I've created this blog to impart my insights on web development and inspire developers to continue their journey of learning and growth alongside me.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+![Homepage](./highlight.png)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 📝 Key Features
 
-## 🚀 Project Structure
+Here are some key features of this blog:
+- Fully responsive and accessible
+- SEO-friendly
+- Fast performance
+- View transitions
+- Sitemap & RSS feed
+- Light & dark mode
+- Fuzzy search
+- Posts pagination
+- Interactive table of contents
+- Comments with Github Discussions
+- Share posts to Facebook, Linkedin, Twitter
 
-Inside of your Astro project, you'll see the following folders and files:
+## 💯 Lighthouse Score
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 💻 Tech Stack
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- [Astro](https://astro.build/) - Main framework
+- [React](https://react.dev/) - Interactive component
+- [TailwdindCSS](https://tailwindcss.com/) - Styling
+- [MDX](https://mdxjs.com/) - Blog content
+- [Netlify](https://www.netlify.com/) - Deployment
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 👀 Feedback
 
-Any static assets, like images, can be placed in the `public/` directory.
+If you have any feedback, you can contact me via kimhuy011199@gmail.com.
+Alternatively, feel free to open an issue if you find bugs or want to request new features.
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
