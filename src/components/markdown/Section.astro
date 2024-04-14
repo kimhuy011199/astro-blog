@@ -1,0 +1,8 @@
+---
+const { type = '' } = Astro.props;
+const className = type === 'intro' ? '-mt-5' : '';
+---
+
+<section class={className}>
+  <slot />
+</section>
