@@ -22,18 +22,30 @@ const pageTitle = getPageTitle(heading);
 ---
 
 <PageLayout pageTitle={pageTitle} heading={heading}>
-  <p
+  <div
     slot="desc"
-    class="text-zinc-700 dark:text-zinc-300 flex items-center"
+    class="text-zinc-700 dark:text-zinc-300 flex flex-col sm:flex-row sm:items-center"
   >
     <span class="pr-3">All the posts with the tag:</span>
-    <code>#{tag}</code>
-    <a
-      class='text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
-      href="/tags"
-    >
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7"><path d="m7.757 7.757 8.486 8.486M7.757 16.243l8.486-8.486" stroke="currentColor" stroke-width="2"></path></svg>
-    </a>
-  </p>
+    <div class="flex items-center mt-4 sm:mt-0">
+      <code>#{tag}</code>
+      <a
+        class="text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+        href="/tags"
+        aria-label="Remove tag"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-7 h-7"
+          ><path
+            d="m7.757 7.757 8.486 8.486M7.757 16.243l8.486-8.486"
+            stroke="currentColor"
+            stroke-width="2"></path></svg
+        >
+      </a>
+    </div>
+  </div>
   <BlogPostList posts={posts} />
 </PageLayout>
