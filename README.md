@@ -21,6 +21,8 @@ Here are some key features of this blog:
 
 ## 💯 Lighthouse Score
 
+![Lighthouse score](./lighthouse-score.png)
+
 ## 💻 Tech Stack
 
 - [Astro](https://astro.build/) - Main framework
