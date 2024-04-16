@@ -1,6 +1,6 @@
 # Blog huynk.tech 📃
 
-Blog [huynk.tech](https://huynk.tech) is my personal blog, built with Astro. I've created this blog to impart my insights on web development and inspire developers to continue their journey of learning and growth alongside me.
+Blog [huynk.tech](https://blog.huynk.tech) is my personal blog, built with Astro. I've created this blog to impart my insights on web development and inspire developers to continue their journey of learning and growth alongside me.
 
 ![Homepage](./highlight.png)
 

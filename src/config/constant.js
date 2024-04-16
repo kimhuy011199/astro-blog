@@ -15,4 +15,4 @@ export const DEFAULT_SOCIAL_IMAGE_URL = 'huynk-og.webp';
 
 export const APP_NAME = 'huynk.tech';
 
-export const APP_DOMAIN = 'https://huynk.tech';
+export const APP_DOMAIN = 'https://blog.huynk.tech';

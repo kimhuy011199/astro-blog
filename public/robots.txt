@@ -4,4 +4,4 @@ Disallow: /nogooglebot/
 User-agent: *
 Allow: /
 
-Sitemap: https://huynk.tech/sitemap-index.xml
+Sitemap: https://blog.huynk.tech/sitemap-index.xml
