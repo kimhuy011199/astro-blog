@@ -20,25 +20,34 @@ const toc = generateToc(headings);
       return;
     }
 
+    let activeSectionsId = [];
     const observer = new IntersectionObserver((sections) => {
       sections.forEach((section) => {
-        const headingElement = section.target.querySelector('h2, h3, h4, h5');
+        // Get heading element h2 tag
+        const headingElement = section.target.querySelector('h2');
         if (!headingElement) {
           return;
         }
 
+        // Get id of current heading element
         const id = headingElement.getAttribute('id');
-        const linkElement = document.querySelector(
-          `nav#toc li a[href="#${id}"]`
-        );
-        if (!linkElement) {
-          return;
-        }
 
-        // Add/remove the .active class based on whether the section is visible
-        const addRemove = section.intersectionRatio > 0 ? 'add' : 'remove';
-        linkElement.classList[addRemove]('active');
+        // Set active sections
+        if (section.intersectionRatio > 0) {
+          activeSectionsId.push(id);
+        } else {
+          const indexToRemove = activeSectionsId.indexOf(id);
+          if (indexToRemove !== -1) {
+            activeSectionsId.splice(indexToRemove, 1);
+          }
+        }
       });
+
+      // Active the first section and unactive the others
+      document.querySelectorAll(`nav#toc li a`).forEach((tocHeading) => {
+        const isActive = tocHeading.getAttribute('href') === '#' + activeSectionsId[0];
+        isActive ? tocHeading.classList.add('active') : tocHeading.classList.remove('active');
+      })
     });
 
     // Observe all the sections of the article
