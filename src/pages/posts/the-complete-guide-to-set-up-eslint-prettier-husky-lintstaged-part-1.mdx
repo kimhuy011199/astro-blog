@@ -1,0 +1,236 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'The complete guide to setup ESLint, Prettier, Husky, and lint-staged for a React project - Part 1'
+pubDate: 2024-04-28
+description: 'Learn how to set up ESLint, Prettier and avoid conflicts between them in a React project.'
+author: Huy Nguyen Kim
+featured: true
+tags: ['react', 'eslint', 'prettier']
+---
+
+import { Image } from 'astro:assets';
+import Section from '../../components/markdown/Section.astro';
+import BlockCode from '../../components/markdown/BlockCode.astro';
+
+<Section type="intro">
+
+When working on a large project with multiple developers, maintaining code quality and consistency becomes crucial. Inconsistent coding styles, such as the use of `"` or `'`, or perferring `let` and `const` over `var`, can lead to confusion and hinder collaboration. To address this issue, it is essential to establish a coding guideline that outlines the preferred coding style for the project.
+
+Thankfully, there are tools available to help us do this. I will show these through this series:
+
+- Part 1: Enforcing coding standards in a React project with ESLint and Prettier.
+
+- Part 2: Setting up Husky and lint-staged to run lints and format code before committing.
+
+This post will guide you through the setup of ESLint and Prettier, and how to prevent conflicts between them.
+
+</Section>
+
+<Section>
+
+## Preqrequisites
+
+- VSCode: You can use any code editor, but I recommend using VSCode because it has great support for ESLint and Prettier.
+
+- Node.js >= 18: You need to have Node.js installed on your machine to run the commands.
+
+- React project: Before we start, make sure you have a React project set up. If you don't have one, you can create a new React project using Vite:
+
+  <BlockCode>
+
+  ```bash
+  npm create vite@latest my-react-ts-app -- --template react-ts
+  ```
+
+  </BlockCode>
+
+  Or you can clone the [starter project](https://github.com/kimhuy011199/react-initial-app) that I have prepared for this series.
+
+</Section>
+
+<Section>
+
+## Setting up ESLint
+
+[ESLint](https://eslint.org/) is a static code analysis tool that helps identify and fix problems in your JavaScript code. It help you setup rules to enforce coding standards and best practices.
+
+For example, you set the rule that all variables must be declared using `const` or `let` instead of `var`. If a developer tries to use `var`, ESLint will show an error.
+
+Let's install ESlint as dev dependencies:
+
+<BlockCode>
+
+```bash
+npm install eslint --save-dev
+```
+
+</BlockCode>
+
+Next, we need to initialize ESLint configuration by creating new `.eslintrc.cjs` file:
+
+<BlockCode fileName='.eslintrc.cjs'>
+
+```js
+module.exports = {
+  root: true,
+  env: { browser: true, es2020: true },
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parser: '@typescript-eslint/parser',
+  plugins: [],
+  rules: {},
+};
+```
+
+</BlockCode>
+
+This is the basic configuration for ESLint using the recommended rules for JavaScript and TypeScript. You can customize it to fit your project's needs. More rules can be found in the [ESLint rules reference](https://eslint.org/docs/latest/rules/).
+
+To run ESLint, you can add a script to the `package.json` file:
+
+<BlockCode fileName='package.json'>
+
+```json
+{
+  "scripts": {
+    "lint-check": "eslint . --ext .ts,.tsx",
+    "lint": "eslint . --fix --ext .ts,.tsx"
+  }
+}
+```
+
+</BlockCode>
+
+The `lint-check` script will check for lint errors, while the `lint` script will fix them automatically (if possible).
+
+<Image
+  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714405959/astro-blog/the-complete-guide-to-set-up-eslint-prettier-husky-lintstaged-part-1/r5l1lbqr0neige4grvyz.webp"
+  alt="ESLint errors in VSCode"
+  height="1294"
+  width="1378"
+/>
+
+You also can use ESLint in VSCode to see lint errors in real-time while coding by installing the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+
+</Section>
+
+<Section>
+
+## Setting up Prettier
+
+[Prettier](https://prettier.io/) is a code formatter that automatically formats your code according to a set of rules, make your code clean and easy to read.
+
+Let's install Prettier as a dev dependency:
+
+<BlockCode>
+
+```bash
+npm install prettier --save-dev
+```
+
+</BlockCode>
+
+Create a new `.prettierrc.cjs` file to configure Prettier:
+
+<BlockCode fileName='.prettierrc.cjs'>
+
+```js
+module.exports = {
+  semi: true,
+  trailingComma: 'all',
+  singleQuote: true,
+  printWidth: 80,
+  tabWidth: 2,
+};
+```
+
+</BlockCode>
+
+This configuration will make Prettier use single quotes, trailing commas, a print width of 80 characters and tab width of 2 characters.
+
+To run Prettier, you can add a script to the `package.json` file:
+
+<BlockCode fileName='package.json'>
+
+```json
+{
+  "scripts": {
+    "format": "prettier --write ."
+  }
+}
+```
+
+</BlockCode>
+
+You can format files when saving by installing [Prettier extension for VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode). Open the VSCode settings and add the following configuration:
+
+<BlockCode fileName='.vscode/settings.json'>
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+```
+
+</BlockCode>
+
+Now, when you save a file, Prettier will format it automatically by using the configuration in the `.prettierrc.cjs` file.
+
+</Section>
+
+<Section>
+
+## Avoiding conflicts between ESLint and Prettier
+
+ESLint and Prettier have different rules and configurations, which can sometimes conflict with each other. To address this, we need to install these packages:
+
+- `eslint-plugin-prettier`: Runs Prettier as an ESLint rule and reports differences as ESLint issues.
+- `eslint-config-prettier`: Turns off all ESLint rules that are unnecessary or might conflict with Prettier.
+
+<BlockCode>
+
+```bash
+npm install eslint-config-prettier eslint-plugin-prettier --save-dev
+```
+
+</BlockCode>
+
+Then, update the `.eslintrc.cjs` file to include the Prettier configuration:
+
+<BlockCode fileName='.eslintrc.cjs'>
+
+```js
+module.exports = {
+  extends: [
+    // ...
+    'plugin:prettier/recommended',
+    'eslint-config-prettier',
+  ],
+  // ...
+  plugins: [
+    // ...
+    'prettier',
+  ],
+  rules: {
+    // ...
+    'prettier/prettier': 'error',
+  },
+};
+```
+
+</BlockCode>
+
+Now, ESLint and Prettier should work together without any conflicts. ESLint will warn you about code style issues, while Prettier will format your code automatically.
+
+</Section>
+
+<Section>
+
+## Conclusion
+
+In this post, we have set up ESLint and Prettier, used VSCode extensions and written commands to run lints. We have also avoided conflicts between theme by installing `eslint-plugin-prettier` and `eslint-config-prettier`.
+
+In the next post, we will set up Husky and lint-staged to automatically run lints and format code before committing.
+
+</Section>
