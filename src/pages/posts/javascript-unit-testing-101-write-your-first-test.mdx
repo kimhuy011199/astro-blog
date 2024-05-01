@@ -1,0 +1,219 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Javascript unit testing 101 - Write your first test'
+pubDate: 2024-05-01
+description: 'Learn what is unit test and how to write unit test in JavaScript using Vitest.'
+author: Huy Nguyen Kim
+featured: true
+tags: ['react', 'vitest', 'testing']
+---
+
+import { Image } from 'astro:assets';
+import Section from '../../components/markdown/Section.astro';
+import BlockCode from '../../components/markdown/BlockCode.astro';
+
+<Section type="intro">
+
+Imagation that you've coded a function that works perfectly. However, after a few months, you need to update the function to add a new feature. You make some changes, and everything seems to work fine. But when you re-test with some of the original cases and you realize that the function isn't performing as expected 😵‍💫 You spend hours debugging the code, trying to figure out what went wrong.
+
+At this moment, you wish you had written tests for the function. When the function changes, you could simply run the test case to ensure everything works as expected. This is a simple story, but we realize writing tests is important.
+
+There are many types of test: unit test, integration test, e2e test... In this tutorial, I will show you what is unit test and how to write your first unit test in JavaScript using Vitest.
+
+</Section>
+
+<Section>
+
+## What is unit test?
+
+Unit test is a type of testing that focuses on testing individual units of code. A unit is the smallest piece of code that can be isolated and tested. It can be a function, a class, or a module.
+
+The goal of unit testing is to verify that each unit of code works as expected. It helps to catch bugs early in the development process, and ensure that the code is working correctly.
+
+</Section>
+
+<Section>
+
+## Setting up Vitest
+
+There are many testing frameworks available for JavaScript that support for writing and running unit tests. In this post, we will use [Vitest](https://vitest.dev/), a lightweight and fast testing framework for JavaScript.
+
+To get started with Vitest, you need to install it using npm:
+
+<BlockCode>
+
+```bash
+npm install --save-dev vitest
+```
+
+</BlockCode>
+
+</Section>
+
+<Section>
+
+## Writing your first test
+
+Once you have installed Vitest, you can create a test file by creating a new file with a `.test.js` extension. For example, if you have a file called `sum.js`, you can create a test file called `sum.test.js`.
+
+<BlockCode fileName='src/sum.js'>
+
+```javascript
+export const sum = (a, b) => a + b;
+```
+
+</BlockCode>
+
+<BlockCode fileName='src/tests/sum.test.js'>
+
+```javascript
+import { describe, it, expect } from 'vitest';
+import { sum } from '../sum';
+
+// describe() is a test suite
+describe('sum', () => {
+  // it() is a test case
+  it('should adds positive numbers correctly', () => {
+    // expect() is an assertion
+    expect(sum(1, 2)).toBe(3);
+  });
+
+  it('should adds negative numbers correctly', () => {
+    expect(sum(-1, -2)).toBe(-3);
+  });
+});
+```
+
+</BlockCode>
+
+Let me explain the code above:
+
+- We import the `describe`, `it`, and `expect` functions from Vitest.
+- We import the `sum` function from the `sum.js` file (the function we will test).
+- We use the `describe` function to group the test cases together. This is optional but can be useful for organizing your tests.
+- We use the `it` function to define a test case. The first argument is a description of the test case, and the second argument is a function that contains the test code.
+- We use the `expect` function to make assertions about the result of the test case. In this case, we are using the `toBe` matcher to check if the result of the `sum` function is equal to the expected value.
+
+</Section>
+
+<Section>
+
+## Running your test
+
+To run your test, you add a `test` script to your `package.json` file:
+
+<BlockCode>
+
+```json
+{
+  "scripts": {
+    "test": "vitest"
+  }
+}
+```
+
+</BlockCode>
+
+Then you can run the test by running the following command:
+
+<BlockCode>
+
+```bash
+npm run test
+```
+
+</BlockCode>
+
+Vitest will look for all files with a `.test.js` extension in the current directory and run them.
+
+<Image
+  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714552318/astro-blog/javascript-unit-testing-write-your-first-test/miyqpkckx2xbku1u53ff.webp"
+  alt="Vitest test results"
+  height="1902"
+  width="1906"
+/>
+
+Try to make a mistake in the `sum` function:
+
+<BlockCode fileName='src/sum.js'>
+
+```javascript
+export const sum = (a, b) => a + b + 1;
+```
+
+</BlockCode>
+
+And run the test again:
+
+<Image
+  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714552318/astro-blog/javascript-unit-testing-write-your-first-test/dwj9hk7ywylurr0t16ua.webp"
+  alt="Vitest test results with error"
+  height="1914"
+  width="1892"
+/>
+
+You see the expected value is `-3` but recevied `-2`. The test failed because the `sum` function is not working as expected. You need to revert the function to its original state to pass the test.
+
+</Section>
+
+<Section>
+
+## Vitest UI
+
+Vitest comes with a built-in UI that displays the test results in the browser. To use the UI, you need to install the `@vitest/ui` package:
+
+<BlockCode>
+
+```bash
+npm install --save-dev @vitest/ui
+```
+
+</BlockCode>
+
+Then, add the new `vitest-ui` script to your `package.json` file:
+
+<BlockCode>
+
+```json
+{
+  "scripts": {
+    "test": "vitest",
+    "test-ui": "vitest --ui"
+  }
+}
+```
+
+</BlockCode>
+
+Run the following command to open the UI:
+
+<BlockCode>
+
+```bash
+npm run test-ui
+```
+
+</BlockCode>
+
+This will open a new browser window with the test results.
+
+<Image
+  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714552318/astro-blog/javascript-unit-testing-write-your-first-test/ohuflletgek6vgie7woh.webp"
+  alt="Vitest UI"
+  height="374"
+  width="2036"
+/>
+
+More information about Vitest UI can be found [here](https://vitest.dev/guide/ui.html).
+
+</Section>
+
+<Section>
+
+## Conclusion
+
+Through this post, you learned what is unit test and how to write your first unit test in JavaScript using Vitest. You also can use the Vitest UI to view the test results in the browser.
+
+In the next tutorial, we will learn how to write a good assertion by using matchers.
+
+</Section>
