@@ -1,0 +1,61 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Javascript unit testing 101 - Write good assertions'
+pubDate: 2024-05-01
+description: 'Learn how to write a good assertion by using matchers in JavaScript unit testing using Vitest.'
+author: Huy Nguyen Kim
+featured: true
+tags: ['react', 'vitest', 'testing']
+---
+
+import { Image } from 'astro:assets';
+import Section from '../../components/markdown/Section.astro';
+import BlockCode from '../../components/markdown/BlockCode.astro';
+
+<Section type="intro">
+
+</Section>
+
+<Section>
+
+## What are assertions and matchers?
+
+- An assertion is a statement that checks if the actual value of a test case is equal to the expected value.
+
+- A matcher is a function that compares the actual value with the expected value and returns a boolean value (true or false) to indicate if the assertion is true or false.
+
+In a testcase, the assertion is important because it helps you verify that the code works as expected or not.
+
+</Section>
+
+<Section>
+
+## Common matchers
+
+There are many matchers available in Vitest. Here are some common matchers:
+
+- `toBe`: Compares the actual value with the expected value using strict equality (`===`).
+- `toEqual`: Compares the actual value with the expected value deeply.
+- `toMatch`: Compares the actual value with a regular expression.
+- `toContain`: Checks if the actual value contains the expected value.
+- `toThrow`: Checks if the actual value throws an error.
+
+</Section>
+
+<Section>
+
+## Writing a good assertion
+
+To write a good assertion, you need to choose the right matcher for the test case.
+
+- Tight assertions
+
+- Loose assertions
+
+</Section>
+
+<Section>
+
+## Conclusion
+
+</Section>
