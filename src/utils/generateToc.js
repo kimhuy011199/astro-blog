@@ -9,7 +9,8 @@ const generateToc = (headings) => {
     if (heading.depth === 2) {
       toc.push(heading);
     } else {
-      parentHeadings.get(heading.depth - 1).subheadings.push(heading);
+      // No need to create a deeper hierarchy
+      // parentHeadings.get(heading.depth - 1).subheadings.push(heading);
     }
   });
 
