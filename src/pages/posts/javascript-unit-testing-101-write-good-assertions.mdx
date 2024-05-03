@@ -1,18 +1,19 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Javascript unit testing 101 - Write good assertions'
-pubDate: 2024-05-01
+pubDate: 2024-05-02
 description: 'Learn how to write a good assertion by using matchers in JavaScript unit testing using Vitest.'
 author: Huy Nguyen Kim
 featured: true
 tags: ['react', 'vitest', 'testing']
 ---
 
-import { Image } from 'astro:assets';
 import Section from '../../components/markdown/Section.astro';
 import BlockCode from '../../components/markdown/BlockCode.astro';
 
 <Section type="intro">
+
+It seem easy to write a test case, but it's not easy to write a good test case. A good test case shouldn't break easily when you make small changes to your code. In this article, I will guide you how to write a good assertion by using matchers in JavaScript unit testing using Vitest.
 
 </Section>
 
@@ -32,13 +33,89 @@ In a testcase, the assertion is important because it helps you verify that the c
 
 ## Common matchers
 
-There are many matchers available in Vitest. Here are some common matchers:
+In Vitest, there are several matchers that you can use to write assertions in your test cases. Here are some common matchers:
 
-- `toBe`: Compares the actual value with the expected value using strict equality (`===`).
-- `toEqual`: Compares the actual value with the expected value deeply.
-- `toMatch`: Compares the actual value with a regular expression.
-- `toContain`: Checks if the actual value contains the expected value.
-- `toThrow`: Checks if the actual value throws an error.
+### Equality
+
+- `.toBe` compares **primitive values** or checks referential identity of object instances.
+- `.toEqual` compares recursively all properties of object instances (also known as "deep" equality).
+
+You can see the difference between `toBe` and `toEqual` in the following example:
+
+<BlockCode fileName='src/tests/assertions.test.js'>
+```js
+it('toBe with primitive values', () => {
+  const a = 1;
+  const b = 1;
+  expect(a).toBe(b); // true
+  expect(a).toEqual(b); // true
+});
+it('toEqual with objects', () => {
+  const obj1 = { a: 1, b: 2 };
+  const obj2 = { a: 1, b: 2 };
+  expect(obj1).toBe(obj2); // false
+  expect(obj1).toEqual(obj2); // true
+});
+```
+</BlockCode>
+
+### Numbers
+
+- `toBeGreaterThan`
+- `toBeGreaterThan()`
+- `toBeGreaterThanOrEqualTo()`
+- `toBeLessThan()`
+- `toBeLessThanOrEqualTo()`
+- `toBeCloseTo()` checks if the actual value is close to the expected value within a given precision.
+
+<BlockCode fileName='src/tests/assertions.test.js'>
+```js
+it('toCloseTo with floating point numbers', () => {
+  const a = 0.1 + 0.2;
+  expect(a).toBe(0.3); // false
+  expect(a).toBeCloseTo(0.3); // true
+});
+```
+</BlockCode>
+
+### Strings
+
+- `toMatch` compares the actual value with the expected value using a regular expression.
+
+### Objects
+
+- `toMatchObject` compares the actual value with the expected value using a partial object.
+- `toHaveProperty` checks if the actual value has the expected property.
+
+<BlockCode fileName='src/tests/assertions.test.js'>
+```js
+it('toMatchObject and toHaveProperty', () => {
+  const obj1 = { a: 1, b: 2 };
+  const obj2 = { a: 1 };
+  expect(obj1).toEqual(obj2); // false
+  expect(obj1).toMatchObject(obj2); // true
+  expect(obj1).toHaveProperty('b'); // true
+});
+```
+</BlockCode>
+
+### Arrays
+
+- `toHaveLength` checks if the actual value has the expected length.
+- `toContain` checks if the actual value contains the expected value.
+
+<BlockCode fileName='src/tests/assertions.test.js'>
+```js
+it('toContain and toHaveLength', () => {
+  const arr = [1, 2, 3];
+  arr.push(5);
+  expect(arr).toContain(5); // true
+  expect(arr).toHaveLength(4); // true
+});
+```
+</BlockCode>
+
+You can find the full list of matchers in the [Vitest documentation](https://vitest.dev/api/expect).
 
 </Section>
 
@@ -46,16 +123,46 @@ There are many matchers available in Vitest. Here are some common matchers:
 
 ## Writing a good assertion
 
-To write a good assertion, you need to choose the right matcher for the test case.
+To write a good assertion, you need to choose the **right matcher** for the test case.
 
-- Tight assertions
+- A too loose assertion is one that is not specific enough, potentially leading to false positives (test passes when the code is actually incorrect). For example:
 
-- Loose assertions
+<BlockCode fileName='src/tests/assertions.test.js'>
+```js
+it('too loose assertion', () => {
+  const sum = 1 + 2;
+  expect(sum).toBeDefined(); // Always pass because it only checks if the value is defined
+  expect(typeof sum).toBe('number'); // Always pass because it only checks if the type is correct
+  // Should be checked with strict equality
+  expect(sum).toBe(3);
+});
+```
+</BlockCode>
+
+- A too tight assertion is one that is overly specific, potentially leading to false negatives (test failures when the code is actually correct). For example:
+
+<BlockCode fileName='src/tests/assertions.test.js'>
+```js
+it('too tight assertion', () => {
+  const errorMsg = 'Page not found';
+  expect(errorMsg).toBe('Page not found'); // Pass if the error message is exactly the same
+  // Should be checked with regular expression
+  // It will pass even if the error message is 'Page not found' or 'Page not found.' or 'Page not found!'
+  expect(errorMsg).toMatch(/not found/i);
+});
+```
+</BlockCode>
+
+Remember that depending on the context, you may need to use different matchers to write good assertions. The example above is not always correct, but it helps you understand the concept of loose and tight assertions.
 
 </Section>
 
 <Section>
 
 ## Conclusion
+
+In this article, you learned about assertions and matchers in JavaScript unit testing. You also learned how to write good assertions by choosing the right matcher for your test cases.
+
+We will continue to explore about positive and negative testing in the next articles.
 
 </Section>
