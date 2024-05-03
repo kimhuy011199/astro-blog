@@ -1,0 +1,242 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Javascript unit testing 101 - Positive and negative testing'
+pubDate: 2024-05-03
+description: 'Learn how to write positive and negative test cases, boundary testing and code coverage in JavaScript unit testing using Vitest.'
+author: Huy Nguyen Kim
+featured: true
+tags: ['react', 'vitest', 'testing']
+---
+
+import { Image } from 'astro:assets';
+import Section from '../../components/markdown/Section.astro';
+import BlockCode from '../../components/markdown/BlockCode.astro';
+import CalloutPitfall from '../../components/markdown/CalloutPitfall.astro';
+
+<Section type="intro">
+
+Beside the quality of the test cases, the coverage of the test cases is also important. We need to make sure that our test cases cover all possible scenarios and edge cases.
+
+In this post, we will learn about the positive and negative test cases, boundary testing, and code coverage.
+
+</Section>
+
+<Section>
+
+## Positive testing and negative testing
+
+**Positive testing** make sure that our application works under normal conditions with the correct input, while **negative testing** check how it handles unexpected or invalid input.
+
+For example, we have a function named `isLuckyNumber` that checks if the lucky number is between 1 and 8:
+
+<BlockCode fileName='src/positve-negative.js'>
+
+```javascript
+export const isLuckyNumber = (num) => {
+  if (typeof num !== 'number') {
+    return false;
+  }
+
+  return num >= 1 && num <= 8;
+};
+```
+
+</BlockCode>
+
+Here are some examples of positive and negative test cases:
+
+<BlockCode fileName='src/tests/positve-negative.test.js'>
+
+```javascript
+import { isLuckyNumber } from '../positve-negative';
+
+describe('isLuckyNumber', () => {
+  // Positive test cases
+  it('should return true if the number is between 1 and 8', () => {
+    expect(isLuckyNumber(4)).toBe(true);
+  });
+
+  // Negative test cases
+  it('should return false if the number is not between 1 and 8', () => {
+    expect(isLuckyNumber(-20)).toBe(false);
+    expect(isLuckyNumber(20)).toBe(false);
+  });
+
+  // Negative test cases for invalid input
+  it('should return false if the input is not a number', () => {
+    expect(isLuckyNumber('1')).toBe(false);
+    expect(isLuckyNumber(null)).toBe(false);
+  });
+});
+```
+
+</BlockCode>
+
+The above test cases cover both positive and negative scenarios. However, we can improve the test coverage by adding boundary testing. So...
+
+</Section>
+
+<Section>
+
+## What is boundary testing?
+
+Boundary testing is a software testing technique in which tests are designed to include values at the boundaries between partitions. It is based on the idea that **the most errors in software are made at the boundaries of the input values**.
+
+Let move on to the `isLuckyNumber` function, we can add some boundary value test cases:
+
+<BlockCode fileName='src/tests/positve-negative.test.js'>
+
+```javascript
+describe('isLuckyNumber', () => {
+  // Positive test cases
+  it('should return true if the number is between 1 and 8', () => {
+    expect(isLuckyNumber(4)).toBe(true);
+  });
+  // Boundary value positive test cases
+  it('should return true if the number is 1', () => {
+    expect(isLuckyNumber(1)).toBe(true);
+  });
+  it('should return true if the number is 8', () => {
+    expect(isLuckyNumber(8)).toBe(true);
+  });
+
+  // Negative test cases
+  it('should return false if the number is not between 1 and 8', () => {
+    expect(isLuckyNumber(-20)).toBe(false);
+    expect(isLuckyNumber(20)).toBe(false);
+  });
+  // Boundary value negative test cases
+  it('should return false if the number is less than 1', () => {
+    expect(isLuckyNumber(0)).toBe(false);
+  });
+  it('should return false if the number is greater than 8', () => {
+    expect(isLuckyNumber(9)).toBe(false);
+  });
+
+  // Negative test cases for invalid input
+  it('should return false if the input is not a number', () => {
+    expect(isLuckyNumber('1')).toBe(false);
+    expect(isLuckyNumber(null)).toBe(false);
+  });
+});
+```
+
+</BlockCode>
+
+Now, we have more test cases to cover the boundary values of the input. But look like we have a lot of duplicated code. We can refactor the test cases in the next section by using...
+
+</Section>
+
+<Section>
+
+## Parameterized tests
+
+Parameterized tests are a way to run the same test with different input values. This can help reduce code duplication and make your tests more maintainable.
+
+In Vitest, you can use the `test.each` function to create parameterized tests:
+
+<BlockCode fileName='src/tests/positve-negative.test.js'>
+
+```javascript
+describe('isLuckyNumber', () => {
+  // Parameterized tests
+  test.each([
+    { input: 1, scenario: '1', expected: true },
+    { input: 4, scenario: 'between 1 and 8', expected: true },
+    { input: 8, scenario: '8', expected: true },
+    { input: -20, scenario: 'not between 1 and 8', expected: false },
+    { input: 0, scenario: 'less than 1', expected: false },
+    { input: 9, scenario: 'greater than 8', expected: false },
+    { input: 20, scenario: 'not between 1 and 8', expected: false },
+  ])(
+    'should return $expected if the number is $scenario',
+    ({ input, expected }) => {
+      expect(isLuckyNumber(input)).toBe(expected);
+    }
+  );
+});
+```
+
+</BlockCode>
+
+You will see the result is the same as the previous test cases and we don't have duplicated code anymore.
+
+<Image
+  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/fcedm2k34v9eyp7zrol0.webp"
+  alt="Parameterized tests in Vitest"
+  height="1922"
+  width="1512"
+/>
+
+</Section>
+
+<Section>
+
+## Code coverage
+
+Code coverage is a metric that measures the percentage of code that is executed by your tests. It helps you identify areas of your code that are not covered by your tests.
+
+To measure code coverage in Vitest, you need to install the `@vitest/coverage-v8` package:
+
+<BlockCode>
+
+```bash
+npm install --save-dev @vitest/coverage-v8
+```
+
+</BlockCode>
+
+Then, you can use Vitest UI to show the code coverage:
+
+<BlockCode>
+
+```bash
+npm run test-ui
+```
+
+</BlockCode>
+
+Open the browser and you will see the Vitest UI. Click on the `Coverage` tab to see the code coverage report.
+
+<Image
+  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/cxicgu0j13ewowrjwtfy.webp"
+  alt="Vitest test results"
+  height="2244"
+  width="1090"
+/>
+
+<Image
+  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/k181zlrwoovasj42iwog.webp"
+  alt="Vitest test coverage report"
+  height="2422"
+  width="962"
+/>
+
+Vitest will generate a coverage report in the `coverage` directory. You can add the `coverage` to `.gitignore` file to avoid pushing the coverage report to the remote repository.
+
+Try to remove some very end test cases for `testing the input is not a number` and run the test again:
+
+<Image
+  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/ir8uj7w47ebet3tu7cet.webp"
+  alt="Vitest test coverage report with missing test cases"
+  height="2062"
+  width="710"
+/>
+
+You will see that the code `if (typeof num !== 'number') { return false; }` is not covered by the test cases. You should add the previous test cases to cover this code.
+
+<CalloutPitfall>
+
+Remember that **100% code coverage does not mean your code is bug-free**. It only means that all lines of code are executed by your tests. You still need to write comprehensive test cases to ensure that your application works as expected.
+
+</CalloutPitfall>
+
+</Section>
+
+<Section>
+
+## Conclusion
+
+Beside know how to write a good test case, we also need to know how to measure the coverage of the test cases to make sure that all possible scenarios are covered. You also need to concern about the boundary values of the input to make sure that your application works correctly in edge cases.
+
+</Section>
