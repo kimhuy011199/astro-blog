@@ -16,7 +16,8 @@ const toc = generateToc(headings);
 
 <script>
   const registerIntersectionObserver = () => {
-    if (window.location.pathname.split('/')[1] !== 'posts') {
+    const pathname = window.location.pathname.split('/')[1];
+    if (pathname !== 'posts' && pathname !== 'drafts') {
       return;
     }
 

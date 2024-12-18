@@ -11,7 +11,7 @@ export const getStaticPaths = async ({ paginate }) => {
   return paginate(sortedPosts, { pageSize: POST_PER_PAGE });
 };
 
-const { page } = Astro.props;
+const { page } = Astro.props as any;
 
 const pageTitle = 'Blog Page';
 const heading = 'Posts';

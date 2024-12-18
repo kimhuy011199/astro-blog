@@ -11,6 +11,8 @@ import Comment from '@components/post/Comment';
 
 const { frontmatter, headings } = Astro.props;
 const { title, description, author, pubDate, tags, url } = frontmatter;
+const drafted = url.includes('/drafts/');
+
 ---
 
 <BaseLayout pageTitle={title} pageDesc={description} pageAuthor={author}>
@@ -35,7 +37,7 @@ const { title, description, author, pubDate, tags, url } = frontmatter;
     </div>
     <div>
       <div class="w-1 h-12 my-10 mx-auto bg-green-500 rounded-lg"></div>
-      <RelatedPosts currentPost={frontmatter} />
+      {!drafted ? <RelatedPosts currentPost={frontmatter} /> : null}
     </div>
   </div>
 </BaseLayout>
