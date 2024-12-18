@@ -162,10 +162,10 @@ describe('isLuckyNumber', () => {
 You will see the result is the same as the previous test cases and we don't have duplicated code anymore.
 
 <Image
-  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/fcedm2k34v9eyp7zrol0.webp"
-  alt="Parameterized tests in Vitest"
-  height="1922"
-  width="1512"
+  src='https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/fcedm2k34v9eyp7zrol0.webp'
+  alt='Parameterized tests in Vitest'
+  height='1922'
+  width='1512'
 />
 
 </Section>
@@ -199,17 +199,17 @@ npm run test-ui
 Open the browser and you will see the Vitest UI. Click on the `Coverage` tab to see the code coverage report.
 
 <Image
-  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/cxicgu0j13ewowrjwtfy.webp"
-  alt="Vitest test results"
-  height="2244"
-  width="1090"
+  src='https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/cxicgu0j13ewowrjwtfy.webp'
+  alt='Vitest test results'
+  height='2244'
+  width='1090'
 />
 
 <Image
-  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/k181zlrwoovasj42iwog.webp"
-  alt="Vitest test coverage report"
-  height="2422"
-  width="962"
+  src='https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/k181zlrwoovasj42iwog.webp'
+  alt='Vitest test coverage report'
+  height='2422'
+  width='962'
 />
 
 Vitest will generate a coverage report in the `coverage` directory. You can add the `coverage` to `.gitignore` file to avoid pushing the coverage report to the remote repository.
@@ -217,10 +217,10 @@ Vitest will generate a coverage report in the `coverage` directory. You can add 
 Try to remove some very end test cases for `testing the input is not a number` and run the test again:
 
 <Image
-  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/ir8uj7w47ebet3tu7cet.webp"
-  alt="Vitest test coverage report with missing test cases"
-  height="2062"
-  width="710"
+  src='https://res.cloudinary.com/cloudinaryassets/image/upload/v1714707184/astro-blog/javascript-unit-testing-positive-and-negative-testing/ir8uj7w47ebet3tu7cet.webp'
+  alt='Vitest test coverage report with missing test cases'
+  height='2062'
+  width='710'
 />
 
 You will see that the code `if (typeof num !== 'number') { return false; }` is not covered by the test cases. You should add the previous test cases to cover this code.

@@ -129,10 +129,10 @@ node src/test.js
 You should see the following output in the console:
 
 <Image
-  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714614611/astro-blog/javascript-unit-testing-write-your-first-test/tmdtu4io1elgtsibwnpd.webp"
-  alt="Test results in the console"
-  height="1790"
-  width="210"
+  src='https://res.cloudinary.com/cloudinaryassets/image/upload/v1714614611/astro-blog/javascript-unit-testing-write-your-first-test/tmdtu4io1elgtsibwnpd.webp'
+  alt='Test results in the console'
+  height='1790'
+  width='210'
 />
 
 You should see all the tests passed, the `sum` function performs as expected. Try some mistakes in the `sum` function by adding `1` to the result:
@@ -148,10 +148,10 @@ export const sum = (a, b) => a + b + 1;
 Run the test again and you should see the failed tests in the console:
 
 <Image
-  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714614611/astro-blog/javascript-unit-testing-write-your-first-test/sytpvrrn5mm6llxxji3h.webp"
-  alt="Test results in the console with error"
-  height="1814"
-  width="540"
+  src='https://res.cloudinary.com/cloudinaryassets/image/upload/v1714614611/astro-blog/javascript-unit-testing-write-your-first-test/sytpvrrn5mm6llxxji3h.webp'
+  alt='Test results in the console with error'
+  height='1814'
+  width='540'
 />
 
 </Section>
@@ -239,10 +239,10 @@ npm run test
 Vitest will look for all files with a `.test.js` extension in the current directory and run them.
 
 <Image
-  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714552318/astro-blog/javascript-unit-testing-write-your-first-test/miyqpkckx2xbku1u53ff.webp"
-  alt="Vitest test results"
-  height="1902"
-  width="1906"
+  src='https://res.cloudinary.com/cloudinaryassets/image/upload/v1714552318/astro-blog/javascript-unit-testing-write-your-first-test/miyqpkckx2xbku1u53ff.webp'
+  alt='Vitest test results'
+  height='1902'
+  width='1906'
 />
 
 Try to make a mistake in the `sum` function:
@@ -258,10 +258,10 @@ export const sum = (a, b) => a + b + 1;
 And run the test again:
 
 <Image
-  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714552318/astro-blog/javascript-unit-testing-write-your-first-test/dwj9hk7ywylurr0t16ua.webp"
-  alt="Vitest test results with error"
-  height="1914"
-  width="1892"
+  src='https://res.cloudinary.com/cloudinaryassets/image/upload/v1714552318/astro-blog/javascript-unit-testing-write-your-first-test/dwj9hk7ywylurr0t16ua.webp'
+  alt='Vitest test results with error'
+  height='1914'
+  width='1892'
 />
 
 You see the expected value is `-3` but recevied `-2`. The test failed because the `sum` function is not working as expected. You need to revert the function to its original state to pass the test.
@@ -310,10 +310,10 @@ npm run test-ui
 This will open a new browser window with the test results.
 
 <Image
-  src="https://res.cloudinary.com/cloudinaryassets/image/upload/v1714552318/astro-blog/javascript-unit-testing-write-your-first-test/ohuflletgek6vgie7woh.webp"
-  alt="Vitest UI"
-  height="374"
-  width="2036"
+  src='https://res.cloudinary.com/cloudinaryassets/image/upload/v1714552318/astro-blog/javascript-unit-testing-write-your-first-test/ohuflletgek6vgie7woh.webp'
+  alt='Vitest UI'
+  height='374'
+  width='2036'
 />
 
 More information about Vitest UI can be found [here](https://vitest.dev/guide/ui.html).
